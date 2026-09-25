@@ -4,30 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propuesta Pastoral SJT 2026-2027 | Renacer en el Espíritu</title>
-    
-    <!-- Fuentes de Google: Bebas Neue y Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        tarbes: {
-                            blue: '#020F79',
-                            gray: '#D9D9D9',
-                            yellow: '#FFC700',
-                            lightblue: '#586195',
-                            dark: '#00010F',
-                            white: '#FFFFFF'
-                        }
+                        tarbes: { blue: '#020F79', gray: '#D9D9D9', yellow: '#FFC700', lightblue: '#586195', dark: '#00010F', white: '#FFFFFF' }
                     },
                     fontFamily: {
                         futura: ['Futura', 'Trebuchet MS', 'Arial', 'sans-serif'],
@@ -39,532 +26,444 @@
         }
     </script>
     <style>
-        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .hover-lift:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(2, 15, 121, 0.15); }
-        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Efecto de cristal (Glassmorphism) */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+        .hover-lift{transition:transform .3s,box-shadow .3s}.hover-lift:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(2,15,121,.15)}
+        .tab-content{display:none;animation:fadeIn .4s}.tab-content.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+        .acc-body{max-height:0;overflow:hidden;transition:max-height .5s ease}.acc-body.open{max-height:3000px}
     </style>
 </head>
 <body class="bg-[#f8f9fa] text-tarbes-dark font-montserrat antialiased selection:bg-tarbes-yellow selection:text-tarbes-dark">
 
-    <!-- Navegación -->
-    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-tarbes-gray/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-24 items-center">
-                <div class="flex items-center space-x-4">
-                    <img src="assets/logo-sjt-azul.png" alt="Logo SJT" class="h-16 object-contain">
-                    <div class="hidden sm:flex flex-col">
-                        <span class="font-bebas text-2xl text-tarbes-blue leading-none tracking-wide">HERMANAS DE SAN</span>
-                        <span class="font-bebas text-2xl text-tarbes-blue leading-none tracking-wide">JOSÉ DE TARBES</span>
-                    </div>
-                </div>
-                <div class="hidden lg:flex space-x-8 font-montserrat font-medium text-sm text-tarbes-lightblue items-center">
-                    <a href="#hero" class="hover:text-tarbes-blue transition">Inicio</a>
-                    <a href="#explicacion-logo" class="hover:text-tarbes-blue transition">El Logo</a>
-                    <a href="#linea-fuerza" class="hover:text-tarbes-blue transition">Línea Fuerza</a>
-                    <a href="#pedagogia" class="hover:text-tarbes-blue transition">Pedagogía</a>
-                    <a href="#metodologia" class="hover:text-tarbes-blue transition">Metodología</a>
-                    <a href="#momentos" class="bg-tarbes-yellow text-tarbes-blue px-5 py-2.5 rounded-full font-bold hover:bg-yellow-400 hover:shadow-lg transition">Momentos 2026</a>
-                </div>
-                <!-- Menú móvil (Hamburguesa) -->
-                <div class="lg:hidden flex items-center">
-                    <button class="text-tarbes-blue text-2xl focus:outline-none"><i class="fa-solid fa-bars"></i></button>
-                </div>
+<!-- ══════ BARRA DE PROGRESO ══════ -->
+<div class="fixed top-0 left-0 w-full z-[60] bg-tarbes-dark/90 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-3 md:px-4 flex items-center h-7 md:h-8 gap-2 md:gap-4">
+        <span class="font-futura text-[8px] md:text-[10px] text-white/60 uppercase tracking-wider whitespace-nowrap shrink-0 hidden sm:inline">Progreso 26-27</span>
+        <div class="flex-grow bg-white/10 rounded-full h-2 md:h-2.5 relative overflow-hidden">
+            <div id="progress-fill" class="h-full rounded-full bg-gradient-to-r from-tarbes-yellow to-yellow-400 transition-all duration-1000 relative">
+                <span class="absolute right-1 top-1/2 -translate-y-1/2 text-[7px] md:text-[8px] font-bold text-tarbes-dark" id="progress-percent"></span>
             </div>
         </div>
-    </nav>
+        <span id="progress-label" class="font-montserrat text-[8px] md:text-[10px] text-tarbes-yellow font-bold whitespace-nowrap"></span>
+    </div>
+</div>
 
-    <!-- Hero Section con foto de la comunidad -->
-    <!-- Se usa bg-fixed para un efecto parallax sutil -->
-    <section id="hero" class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-tarbes-dark min-h-[90vh] flex items-center bg-fixed bg-cover bg-center" style="background-image: url('assets/hero-bg.jpg'); background-position: center 20%;">
-        
-        <!-- Overlay oscuro y azul para contraste del texto -->
-        <div class="absolute inset-0 bg-gradient-to-r from-tarbes-blue/95 via-tarbes-blue/80 to-tarbes-dark/70 mix-blend-multiply"></div>
-        
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <!-- Columna de Texto -->
-                <div class="lg:w-3/5 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6">
-                        <span class="w-2 h-2 rounded-full bg-tarbes-yellow animate-pulse"></span>
-                        <span class="font-futura font-bold text-white tracking-widest uppercase text-xs">Propuesta Pastoral Educativa 2026-2027</span>
-                    </div>
-                    
-                    <h1 class="font-bebas text-6xl md:text-8xl lg:text-[7rem] mb-6 leading-[0.9] tracking-wide text-white drop-shadow-md">
-                        RENACER EN EL ESPÍRITU:<br><span class="text-tarbes-yellow">JUNTOS</span>
-                    </h1>
-                    
-                    <p class="font-montserrat text-lg md:text-xl text-white/90 mb-10 font-light leading-relaxed max-w-2xl border-l-4 border-tarbes-yellow pl-6">
-                        Un camino de comunión, participación y misión. Afrontamos los desafíos como un "suelo sagrado" para reconstruir el tejido social y confirmar la fe de nuestras familias. <span class="font-semibold italic">(Cf. Jn 3,8)</span>
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#explicacion-logo" class="bg-tarbes-yellow text-tarbes-blue font-bold px-8 py-4 rounded-full shadow-[0_0_20px_rgba(255,199,0,0.4)] hover:bg-white hover:text-tarbes-blue transition transform hover:-translate-y-1 font-futura uppercase tracking-wide text-sm text-center flex items-center justify-center gap-2">
-                            Conoce la Propuesta <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
+<!-- ══════ NAVEGACIÓN ══════ -->
+<nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-tarbes-gray/30 top-7 md:top-8" id="main-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 md:h-20 items-center">
+            <a href="#hero" class="flex items-center space-x-2 md:space-x-3 shrink-0">
+                <img src="assets/logo-sjt-azul.png" alt="Logo SJT" class="h-10 md:h-14 object-contain">
+                <div class="flex flex-col leading-none">
+                    <span class="font-bebas text-base md:text-xl text-tarbes-blue tracking-wide">HERMANAS DE SAN</span>
+                    <span class="font-bebas text-base md:text-xl text-tarbes-blue tracking-wide">JOSÉ DE TARBES</span>
                 </div>
+            </a>
+            <div class="hidden xl:flex space-x-5 font-montserrat font-medium text-[13px] text-tarbes-lightblue items-center">
+                <a href="#presentacion" class="hover:text-tarbes-blue transition">Presentación</a>
+                <a href="#explicacion-logo" class="hover:text-tarbes-blue transition">Logo</a>
+                <a href="#fundamentos" class="hover:text-tarbes-blue transition">Fundamentos</a>
+                <a href="#comunidad" class="hover:text-tarbes-blue transition">Comunidad</a>
+                <a href="#pedagogia" class="hover:text-tarbes-blue transition">Pedagogía</a>
+                <a href="#metodologia" class="hover:text-tarbes-blue transition">Metodología</a>
+                <a href="#momentos" class="hover:text-tarbes-blue transition">Momentos</a>
+                <a href="#documentos" class="bg-tarbes-yellow text-tarbes-blue px-4 py-2 rounded-full font-bold hover:bg-yellow-400 transition text-xs"><i class="fa-solid fa-download mr-1"></i>Documentos</a>
             </div>
+            <button id="mobile-menu-btn" class="xl:hidden text-tarbes-blue text-xl p-2 rounded-md hover:bg-tarbes-gray/20"><i class="fa-solid fa-bars"></i></button>
         </div>
-        
-        <!-- Elemento de diseño inferior -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[50px] md:h-[100px]" style="transform: rotate(180deg);">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f8f9fa"></path>
-            </svg>
+    </div>
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-b border-tarbes-gray/30 shadow-lg absolute w-full left-0">
+        <div class="px-4 pt-2 pb-5 flex flex-col font-montserrat font-medium text-tarbes-lightblue text-[15px] space-y-1">
+            <a href="#presentacion" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">Presentación</a>
+            <a href="#explicacion-logo" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">El Logo</a>
+            <a href="#fundamentos" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">Fundamentos</a>
+            <a href="#comunidad" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">Comunidad Educativa</a>
+            <a href="#pedagogia" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">Pedagogía</a>
+            <a href="#metodologia" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">Metodología</a>
+            <a href="#momentos" class="mobile-link px-3 py-3 rounded-md hover:bg-tarbes-gray/20">Momentos</a>
+            <a href="#documentos" class="mobile-link mt-2 text-center bg-tarbes-yellow text-tarbes-blue px-5 py-3 rounded-xl font-bold"><i class="fa-solid fa-download mr-1"></i>Documentos</a>
         </div>
-    </section>
+    </div>
+</nav>
 
-    <!-- Explicación del Logo -->
-    <section id="explicacion-logo" class="py-24 bg-[#f8f9fa] relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="font-bebas text-5xl md:text-6xl text-tarbes-blue tracking-wide mb-4">EXPLICACIÓN DEL LOGO</h2>
-                <div class="w-24 h-2 bg-tarbes-yellow mx-auto rounded-full"></div>
-                <p class="mt-6 font-montserrat text-tarbes-lightblue max-w-2xl mx-auto text-lg">
-                    Evoca la transformación interior, la renovación profunda y la esperanza de un nuevo comienzo lleno de gracia.
+<!-- ══════ HERO ══════ -->
+<section id="hero" class="relative pt-36 pb-16 md:pt-44 lg:pb-32 overflow-hidden bg-tarbes-dark min-h-[85vh] md:min-h-[90vh] flex items-center bg-cover bg-center md:bg-fixed" style="background-image:url('assets/hero-bg.jpg');background-position:center 20%">
+    <div class="absolute inset-0 bg-gradient-to-r from-tarbes-blue/95 via-tarbes-blue/80 to-tarbes-dark/70 mix-blend-multiply"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+            <div class="lg:w-3/5 text-center lg:text-left order-2 lg:order-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-5">
+                    <span class="w-2 h-2 rounded-full bg-tarbes-yellow animate-pulse"></span>
+                    <span class="font-futura font-bold text-white tracking-widest uppercase text-[10px] md:text-xs">Propuesta Pastoral 2026-2027</span>
+                </div>
+                <h1 class="font-bebas text-[3.2rem] leading-[0.88] sm:text-6xl md:text-8xl lg:text-[7rem] mb-5 tracking-wide text-white drop-shadow-md">RENACER EN EL ESPÍRITU:<br><span class="text-tarbes-yellow">JUNTOS</span></h1>
+                <p class="font-montserrat text-sm md:text-lg text-white/90 mb-8 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0 border-l-4 border-tarbes-yellow pl-4 lg:pl-6 text-left italic">
+                    "El viento sopla donde quiere y oyes su ruido, pero no sabes de dónde viene ni adónde va. Así es todo el que nace del Espíritu." <strong>(Jn 3,8)</strong>
                 </p>
+                <div class="bg-white/10 border border-white/20 rounded-2xl p-4 mb-8 backdrop-blur-sm max-w-md mx-auto lg:mx-0">
+                    <p class="font-futura text-tarbes-yellow font-bold uppercase text-xs tracking-wider mb-1">Palabra Clave</p>
+                    <p class="font-bebas text-4xl md:text-5xl text-white">COMUNIÓN</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                    <a href="#presentacion" class="bg-tarbes-yellow text-tarbes-blue font-bold px-7 py-3.5 rounded-full shadow-[0_0_20px_rgba(255,199,0,.4)] hover:bg-white transition transform hover:-translate-y-1 font-futura uppercase tracking-wide text-sm text-center flex items-center justify-center gap-2">Conoce la Propuesta <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#documentos" class="bg-white/10 text-white border border-white/30 font-bold px-7 py-3.5 rounded-full hover:bg-white/20 transition font-futura uppercase tracking-wide text-sm text-center flex items-center justify-center gap-2"><i class="fa-solid fa-file-pdf"></i>Descargar PDF</a>
+                </div>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Parte 1 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl shadow-tarbes-blue/5 border border-tarbes-gray/20 hover-lift group text-center relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-tarbes-yellow/10 rounded-bl-full -z-10 group-hover:bg-tarbes-yellow/20 transition-colors"></div>
-                    <div class="h-24 w-24 mx-auto mb-6 bg-tarbes-blue/5 rounded-full flex items-center justify-center border-2 border-dashed border-tarbes-lightblue/30 group-hover:border-tarbes-blue transition-colors">
-                        <!-- Reemplazar con el recorte real -->
-                        <i class="fa-solid fa-users text-4xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl text-tarbes-blue mb-4 uppercase">Personas Caminando "Juntos"</h3>
-                    <p class="font-montserrat text-sm text-tarbes-lightblue leading-relaxed">
-                        Tomadas de la mano y en la misma dirección, representan la imagen viva de la <strong>sinodalidad</strong>. No avanzamos solos, avanzamos como comunidad en corresponsabilidad.
-                    </p>
-                </div>
-
-                <!-- Parte 2 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl shadow-tarbes-blue/5 border border-tarbes-gray/20 hover-lift group text-center relative overflow-hidden mt-0 md:-mt-8">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-tarbes-blue/5 rounded-bl-full -z-10 group-hover:bg-tarbes-blue/10 transition-colors"></div>
-                    <div class="h-24 w-24 mx-auto mb-6 bg-tarbes-yellow/10 rounded-full flex items-center justify-center border-2 border-dashed border-tarbes-yellow/50 group-hover:border-tarbes-yellow transition-colors">
-                        <!-- Reemplazar con el recorte real -->
-                        <i class="fa-solid fa-route text-4xl text-tarbes-yellow"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl text-tarbes-blue mb-4 uppercase">El Sendero Resplandeciente</h3>
-                    <p class="font-montserrat text-sm text-tarbes-lightblue leading-relaxed">
-                        Armoniza con "Salir" y "Arriesgar". Caminar hacia adelante sobre un sendero de luz que brota de la cruz, simbolizando la <strong>fe viva</strong> confiando plenamente en la Providencia Divina.
-                    </p>
-                </div>
-
-                <!-- Parte 3 -->
-                <div class="bg-white rounded-3xl p-8 shadow-xl shadow-tarbes-blue/5 border border-tarbes-gray/20 hover-lift group text-center relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-tarbes-lightblue/10 rounded-bl-full -z-10 group-hover:bg-tarbes-lightblue/20 transition-colors"></div>
-                    <div class="h-24 w-24 mx-auto mb-6 bg-tarbes-blue/5 rounded-full flex items-center justify-center border-2 border-dashed border-tarbes-lightblue/30 group-hover:border-tarbes-blue transition-colors">
-                        <!-- Reemplazar con el recorte real -->
-                        <i class="fa-solid fa-cross text-4xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl text-tarbes-blue mb-4 uppercase">La Cruz y la Llama SJT</h3>
-                    <p class="font-montserrat text-sm text-tarbes-lightblue leading-relaxed">
-                        La Centralidad en Dios y el horizonte Pascual. Asumir las debilidades inundados por la luz de la Resurrección. El <strong>Carisma Tarbesiano</strong> se sostiene en Cristo.
-                    </p>
+            <div class="lg:w-2/5 flex justify-center order-1 lg:order-2">
+                <div class="w-full max-w-[220px] sm:max-w-[300px] lg:max-w-md bg-white/5 rounded-3xl p-5 md:p-8 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                    <img src="assets/logo_de_la_propuesta_titulo_blanco.png" alt="Renacer en el Espíritu: Juntos" class="w-full h-auto drop-shadow-2xl hover:scale-105 transition duration-500">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]"><svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="block w-full h-[30px] md:h-[80px]" style="transform:rotate(180deg)"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f8f9fa"/></svg></div>
+</section>
 
-    <!-- Línea Fuerza (Con imagen decorativa) -->
-    <section id="linea-fuerza" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <!-- Columna Imagen Decorativa -->
-                <div class="lg:w-5/12 relative">
-                    <div class="absolute -inset-4 bg-tarbes-yellow/20 rounded-3xl transform rotate-3"></div>
-                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Comunidad unida" class="relative rounded-3xl shadow-2xl object-cover h-[500px] w-full z-10">
-                    <!-- Sello decorativo -->
-                    <div class="absolute -bottom-6 -right-6 bg-tarbes-blue text-white w-28 h-28 rounded-full flex flex-col items-center justify-center font-bebas text-xl border-4 border-white shadow-xl z-20">
-                        <span>LÍNEA</span>
-                        <span class="text-tarbes-yellow">FUERZA</span>
-                    </div>
+<!-- ══════ PRESENTACIÓN ══════ -->
+<section id="presentacion" class="py-14 md:py-24 bg-[#f8f9fa]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10"><h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl text-tarbes-blue tracking-wide mb-3">PRESENTACIÓN</h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div></div>
+        <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border border-tarbes-gray/20 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-tarbes-yellow/5 rounded-bl-full"></div>
+            <p class="text-sm md:text-base text-tarbes-lightblue leading-relaxed mb-5"><span class="font-bold text-tarbes-blue">Amadas y amados Tarbesianos,</span> en este Plan Pastoral Educativo 2026-2027 <em>"Renacer en el Espíritu: Juntos"</em> se ha incorporado la dimensión postraumática —atención a personas en situación de vulnerabilidad posterior al terremoto del 28 de Marzo de 2025— y la necesidad de reconstruir el tejido social como un eje transversal a toda la acción pastoral.</p>
+            <p class="text-sm md:text-base text-tarbes-lightblue leading-relaxed mb-5">Ello implica una adecuación de la metodología formativa, integrando elementos de la <strong>neuroeducación</strong>, la <strong>resiliencia comunitaria</strong> y la <strong>espiritualidad del acompañamiento</strong>. La pastoral no solo enseña, sino que <strong>sane, acompañe y fortalezca</strong> a cada miembro de la comunidad educativa.</p>
+            <!-- Contexto venezolano -->
+            <div class="bg-tarbes-blue/5 rounded-2xl p-5 border border-tarbes-blue/10 mb-5">
+                <p class="font-futura font-bold text-tarbes-blue text-xs uppercase tracking-wider mb-2"><i class="fa-solid fa-chart-line mr-1"></i> Contexto Venezolano</p>
+                <p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed">Conforme a los datos de la ENCOVI 2025, la pobreza multidimensional afecta al <strong>55% de la población</strong>. A esto se suma el impacto de los sismos de magnitud 7.2 y 7.5 del 24 de junio de 2026 en la región central, Caracas y La Guaira. La escuela tarbesiana asume configurarse como un <em>"puerto seguro"</em> y un santuario neurobiológico y espiritual.</p>
+            </div>
+            <!-- Año Jubilar -->
+            <div class="bg-tarbes-yellow/10 rounded-2xl p-5 border border-tarbes-yellow/20 mb-5">
+                <p class="font-futura font-bold text-tarbes-blue text-xs uppercase tracking-wider mb-2"><i class="fa-solid fa-church mr-1"></i> Contexto Eclesial — Año Jubilar Coromotano</p>
+                <p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed">Bajo el lema <em>"Bajo tu manto, Venezuela se renueva"</em>, la Iglesia venezolana vive el Año Jubilar Coromotano (8 sept. 2026 — 8 sept. 2027), un tiempo litúrgico de profunda renovación espiritual, recogimiento, oración constante y solidaridad efectiva.</p>
+            </div>
+            <!-- Plan trienal -->
+            <div class="bg-tarbes-blue/5 rounded-2xl p-5 border border-tarbes-blue/10 mb-5">
+                <p class="font-futura font-bold text-tarbes-blue text-xs uppercase tracking-wider mb-3">Plan Trienal — XIX Capítulo Provincial</p>
+                <div class="grid grid-cols-3 gap-2 md:gap-3">
+                    <div class="bg-tarbes-blue text-white rounded-xl p-3 text-center shadow-md"><p class="font-bebas text-lg md:text-2xl">2026-27</p><p class="text-[10px] md:text-xs"><strong>Juntos</strong></p></div>
+                    <div class="bg-white border border-tarbes-gray/50 rounded-xl p-3 text-center"><p class="font-bebas text-lg md:text-2xl text-tarbes-lightblue">2027-28</p><p class="text-[10px] md:text-xs text-tarbes-lightblue"><strong>Salir</strong></p></div>
+                    <div class="bg-white border border-tarbes-gray/50 rounded-xl p-3 text-center"><p class="font-bebas text-lg md:text-2xl text-tarbes-lightblue">2028-29</p><p class="text-[10px] md:text-xs text-tarbes-lightblue"><strong>Arriesgar</strong></p></div>
                 </div>
+            </div>
+            <p class="text-sm text-tarbes-lightblue italic">"Como Provincia de Venezuela-México, creemos que el Espíritu nos llama a ser comunidad que sana, que acoge y que reconstruye desde la esperanza pascual. ¡Renazcamos! ¡Caminemos juntos!"</p>
+            <div class="mt-6 pt-5 border-t border-tarbes-gray/30 flex flex-col sm:flex-row items-center gap-4">
+                <img src="assets/logo_citarbes.png" alt="CITARBES" class="h-14 md:h-16 object-contain">
+                <div class="text-center sm:text-left"><p class="font-futura font-bold text-tarbes-blue text-sm">Lilivet Devia Vargas</p><p class="text-xs text-tarbes-lightblue">Superiora Provincial — Provincia de Venezuela-México</p></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <!-- Columna Texto -->
-                <div class="lg:w-7/12">
-                    <div class="bg-tarbes-blue/5 text-tarbes-blue inline-flex items-center px-4 py-1.5 rounded-full font-futura font-bold text-xs uppercase tracking-wider mb-6 border border-tarbes-blue/10">
-                        <i class="fa-solid fa-star text-tarbes-yellow mr-2"></i> Orientación Principal
-                    </div>
-                    <h2 class="font-bebas text-5xl md:text-6xl tracking-wide mb-8 text-tarbes-dark leading-[1.1]">
-                        Educar para <span class="text-tarbes-blue">integrarse</span> al proceso socio-cultural
-                    </h2>
-                    
-                    <div class="space-y-8">
-                        <div class="bg-white p-6 rounded-2xl shadow-lg shadow-tarbes-gray/40 border-l-4 border-tarbes-yellow hover:translate-x-2 transition-transform">
-                            <h3 class="font-futura font-bold text-tarbes-blue mb-3 uppercase text-sm flex items-center">
-                                <span class="w-8 h-8 rounded-full bg-tarbes-yellow/20 flex items-center justify-center mr-3"><i class="fa-solid fa-bullseye text-tarbes-yellow"></i></span> 
-                                ¿Para Qué?
-                            </h3>
-                            <ul class="font-montserrat text-sm space-y-2 text-tarbes-lightblue ml-11">
-                                <li>• Afrontar el cambio permanente y orgánico de nuestro entorno.</li>
-                                <li>• Rescatar la identidad y los valores nacionales y latinoamericanos.</li>
-                                <li>• Cultivar y salvaguardar nuestra casa común, frente a la cultura del descarte.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-2xl shadow-lg shadow-tarbes-gray/40 border-l-4 border-tarbes-blue hover:translate-x-2 transition-transform">
-                            <h3 class="font-futura font-bold text-tarbes-blue mb-3 uppercase text-sm flex items-center">
-                                <span class="w-8 h-8 rounded-full bg-tarbes-blue/10 flex items-center justify-center mr-3"><i class="fa-solid fa-hands-holding-circle text-tarbes-blue"></i></span> 
-                                ¿Cómo?
-                            </h3>
-                            <ul class="font-montserrat text-sm space-y-2 text-tarbes-lightblue ml-11">
-                                <li>• Poniendo en el centro de todo el proceso a la persona y su dignidad.</li>
-                                <li>• Formando personas disponibles al servicio de la comunidad (Hch. 20,35).</li>
-                                <li>• Acoger y abrirnos a los más necesitados, vulnerables y marginados.</li>
-                            </ul>
-                        </div>
-                    </div>
+<!-- ══════ EXPLICACIÓN DEL LOGO ══════ -->
+<section id="explicacion-logo" class="py-14 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10 md:mb-14"><h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl text-tarbes-blue tracking-wide mb-3">EXPLICACIÓN DEL LOGO</h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div><p class="mt-4 text-tarbes-lightblue max-w-2xl mx-auto text-sm md:text-base">Evoca la transformación interior, la renovación profunda y la esperanza de un nuevo comienzo lleno de gracia.</p></div>
+        <div class="grid md:grid-cols-3 gap-5 md:gap-8">
+            <div class="bg-[#f8f9fa] rounded-3xl p-6 md:p-8 shadow-xl shadow-tarbes-blue/5 border border-tarbes-gray/20 hover-lift group text-center relative overflow-hidden"><div class="absolute top-0 right-0 w-28 h-28 bg-tarbes-yellow/10 rounded-bl-full -z-10"></div><div class="h-28 w-28 md:h-32 md:w-32 mx-auto mb-5 flex items-center justify-center transition-transform group-hover:scale-110"><img src="assets/logo_solo_personas_de_la_propuesta.png" alt="Personas" class="object-contain h-full w-full drop-shadow-md"></div><h3 class="font-futura font-bold text-base md:text-lg text-tarbes-blue mb-2 uppercase">Personas Caminando "Juntos"</h3><p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed">Tomadas de la mano y en la misma dirección, representan la <strong>sinodalidad</strong>. No avanzamos solos. Las respuestas a los desafíos actuales se construyen en Comunidad.</p></div>
+            <div class="bg-[#f8f9fa] rounded-3xl p-6 md:p-8 shadow-xl shadow-tarbes-blue/5 border border-tarbes-gray/20 hover-lift group text-center relative overflow-hidden md:-mt-6"><div class="absolute top-0 right-0 w-28 h-28 bg-tarbes-blue/5 rounded-bl-full -z-10"></div><div class="h-28 w-28 md:h-32 md:w-32 mx-auto mb-5 flex items-center justify-center transition-transform group-hover:scale-110"><img src="assets/logo_solo_camino_de_la_propuesta.png" alt="Sendero" class="object-contain h-full w-full drop-shadow-md"></div><h3 class="font-futura font-bold text-base md:text-lg text-tarbes-blue mb-2 uppercase">El Sendero Resplandeciente</h3><p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed">Un sendero de luz surge de los pies de la cruz. Avanzar aunque el terreno parezca incierto, simboliza la <strong>fe viva</strong> confiando plenamente en la Providencia Divina.</p></div>
+            <div class="bg-[#f8f9fa] rounded-3xl p-6 md:p-8 shadow-xl shadow-tarbes-blue/5 border border-tarbes-gray/20 hover-lift group text-center relative overflow-hidden"><div class="absolute top-0 right-0 w-28 h-28 bg-tarbes-lightblue/10 rounded-bl-full -z-10"></div><div class="h-28 w-28 md:h-32 md:w-32 mx-auto mb-5 flex items-center justify-center transition-transform group-hover:scale-110"><img src="assets/logo_solo_cruz_de_la_propuesta.png" alt="Cruz" class="object-contain h-full w-full drop-shadow-md"></div><h3 class="font-futura font-bold text-base md:text-lg text-tarbes-blue mb-2 uppercase">La Cruz y la Llama SJT</h3><p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed">El camino pasa por la Cruz pero está inundado por la luz de la Resurrección. El <strong>Carisma Tarbesiano</strong> se sostiene en Cristo, muerto y resucitado.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ FUNDAMENTOS BÍBLICOS Y ECLESIALES ══════ -->
+<section id="fundamentos" class="py-14 md:py-24 bg-tarbes-blue text-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-52 h-52 bg-tarbes-yellow/10 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-10 md:mb-14"><h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl tracking-wide mb-3">FUNDAMENTOS <span class="text-tarbes-yellow">BÍBLICOS Y ECLESIALES</span></h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div></div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10">
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20"><div class="w-10 h-10 bg-tarbes-yellow rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-book-bible text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-1">Juan 3, 1-8</h3><p class="text-xs text-white/70 italic leading-relaxed">"El viento sopla hacia donde quiere: oyes su rumor, pero no sabes de donde viene ni adónde va. Así sucede con el que ha nacido del Espíritu."</p><p class="text-[10px] text-tarbes-yellow mt-2 font-bold">★ Cita Central del Plan Pastoral</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20"><div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-book-bible text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-1">Hechos 2, 42-47</h3><p class="text-xs text-white/70 italic leading-relaxed">"Los creyentes estaban unidos y poseían todo en común. Compartían el pan con alegría y sencillez. Alababan a Dios y todo el mundo los estimaba."</p><p class="text-[10px] text-white/50 mt-2">Modelo de comunión y alegría compartida</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 sm:col-span-2 lg:col-span-1"><div class="w-10 h-10 bg-tarbes-yellow rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-book-bible text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-1">Lucas 10, 25-37</h3><p class="text-xs text-white/70 italic leading-relaxed">"¿Quién se portó como prójimo? —El que lo trató con misericordia. —Ve y haz tú lo mismo."</p><p class="text-[10px] text-white/50 mt-2">Compasión activa del Buen Samaritano</p></div>
+        </div>
+        <!-- Magisterio con enlaces reales al Vaticano -->
+        <div class="bg-white/5 rounded-2xl p-5 md:p-7 border border-white/10 mb-8">
+            <h3 class="font-bebas text-2xl md:text-3xl text-tarbes-yellow mb-4">Magisterio de la Iglesia</h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <a href="https://www.vatican.va/content/francesco/es/apost_exhortations/documents/papa-francesco_esortazione-ap_20131124_evangelii-gaudium.html" target="_blank" rel="noopener" class="bg-white/10 rounded-xl p-4 text-center hover:bg-white/20 transition group"><p class="font-futura font-bold text-sm">Evangelii Gaudium</p><p class="text-[10px] text-white/60 mt-1">Papa Francisco — La Alegría del Evangelio</p><span class="text-[9px] text-tarbes-yellow mt-2 block opacity-0 group-hover:opacity-100 transition">Leer en Vatican.va <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+                <a href="https://www.vatican.va/content/francesco/es/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html" target="_blank" rel="noopener" class="bg-white/10 rounded-xl p-4 text-center hover:bg-white/20 transition group"><p class="font-futura font-bold text-sm">Laudato Si'</p><p class="text-[10px] text-white/60 mt-1">Papa Francisco — Ecología integral</p><span class="text-[9px] text-tarbes-yellow mt-2 block opacity-0 group-hover:opacity-100 transition">Leer en Vatican.va <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+                <a href="https://www.vatican.va/content/francesco/es/encyclicals/documents/papa-francesco_20201003_enciclica-fratelli-tutti.html" target="_blank" rel="noopener" class="bg-white/10 rounded-xl p-4 text-center hover:bg-white/20 transition group"><p class="font-futura font-bold text-sm">Fratelli Tutti</p><p class="text-[10px] text-white/60 mt-1">Papa Francisco — Amistad social</p><span class="text-[9px] text-tarbes-yellow mt-2 block opacity-0 group-hover:opacity-100 transition">Leer en Vatican.va <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+                <a href="https://www.vatican.va/content/francesco/es/encyclicals/documents/20241024_enciclica-dilexit-nos.html" target="_blank" rel="noopener" class="bg-white/10 rounded-xl p-4 text-center hover:bg-white/20 transition group"><p class="font-futura font-bold text-sm">Dilexit Nos</p><p class="text-[10px] text-white/60 mt-1">Papa Francisco — Corazón de Cristo</p><span class="text-[9px] text-tarbes-yellow mt-2 block opacity-0 group-hover:opacity-100 transition">Leer en Vatican.va <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+                <a href="https://www.vatican.va" target="_blank" rel="noopener" class="bg-white/10 rounded-xl p-4 text-center hover:bg-white/20 transition group"><p class="font-futura font-bold text-sm">Magnifica Humanitas</p><p class="text-[10px] text-white/60 mt-1">Papa León XIV — Dignidad humana e IA</p><span class="text-[9px] text-tarbes-yellow mt-2 block opacity-0 group-hover:opacity-100 transition">Buscar en Vatican.va <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+                <a href="https://www.vatican.va" target="_blank" rel="noopener" class="bg-white/10 rounded-xl p-4 text-center hover:bg-white/20 transition group"><p class="font-futura font-bold text-sm">Diseñar Nuevos Mapas de Esperanza</p><p class="text-[10px] text-white/60 mt-1">Papa León XIV — Educación cristiana</p><span class="text-[9px] text-tarbes-yellow mt-2 block opacity-0 group-hover:opacity-100 transition">Buscar en Vatican.va <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+            </div>
+        </div>
+        <!-- Pilares León XIV -->
+        <div class="bg-white/5 rounded-2xl p-5 md:p-7 border border-white/10">
+            <h3 class="font-bebas text-2xl md:text-3xl text-tarbes-yellow mb-4">Pilares Educativos — Papa León XIV</h3>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="bg-tarbes-yellow/20 rounded-xl p-4 text-center"><i class="fa-solid fa-heart text-tarbes-yellow text-xl mb-2"></i><p class="font-futura font-bold text-xs">Educar desde dentro</p><p class="text-[10px] text-white/60 mt-1">La interioridad como camino</p></div>
+                <div class="bg-white/10 rounded-xl p-4 text-center"><i class="fa-solid fa-people-group text-white text-xl mb-2"></i><p class="font-futura font-bold text-xs">Unidad y comunidad</p><p class="text-[10px] text-white/60 mt-1">Construir sociedad solidaria</p></div>
+                <div class="bg-tarbes-yellow/20 rounded-xl p-4 text-center"><i class="fa-solid fa-hand-holding-heart text-tarbes-yellow text-xl mb-2"></i><p class="font-futura font-bold text-xs">El amor, corazón de la enseñanza</p><p class="text-[10px] text-white/60 mt-1">Educar sin amor es estéril</p></div>
+                <div class="bg-white/10 rounded-xl p-4 text-center"><i class="fa-solid fa-face-smile text-white text-xl mb-2"></i><p class="font-futura font-bold text-xs">La alegría de educar</p><p class="text-[10px] text-white/60 mt-1">Señal del verdadero maestro</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ ORACIÓN ══════ -->
+<section class="py-12 md:py-16 bg-[#f8f9fa]">
+    <div class="max-w-3xl mx-auto px-4">
+        <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border border-tarbes-gray/20 text-center relative overflow-hidden">
+            <i class="fa-solid fa-dove text-3xl text-tarbes-yellow mb-4"></i>
+            <h3 class="font-bebas text-2xl md:text-3xl text-tarbes-blue mb-4">ORACIÓN AL ESPÍRITU SANTO</h3>
+            <p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed italic">Ven, Espíritu Divino, manda tu luz desde el cielo.<br>Padre amoroso del pobre, don en tus dones espléndido; luz que penetra las almas, fuente del mayor consuelo.<br><br>Ven, dulce huésped del alma, descanso de nuestro esfuerzo, tregua en el duro trabajo, brisa en las horas de fuego, gozo que enjuga las lágrimas, y reconforta en los duelos.<br><br>Entra hasta el fondo del alma, divina luz, y enriquécenos. Riega la tierra en sequía, sana el corazón enfermo, lava las manchas, infunde calor de vida en el hielo, doma el espíritu indómito, guía al que tuerce el sendero.<br><br>Reparte tus siete dones, según la fe de tus siervos. Por tu bondad y tu gracia, dale al esfuerzo su mérito. Salva al que busca salvarse, y danos tu gozo eterno. <strong>Amén.</strong></p>
+            <p class="text-[10px] text-tarbes-lightblue/50 mt-3">— Secuencia al Espíritu Santo</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ COMUNIDAD EDUCATIVA ══════ -->
+<section id="comunidad" class="py-14 md:py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10 md:mb-14"><h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl text-tarbes-blue tracking-wide mb-3">COMUNIDAD EDUCATIVA <span class="text-tarbes-yellow">TARBESIANA</span></h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div></div>
+        <!-- Diagrama visual -->
+        <div class="relative max-w-lg mx-auto">
+            <div class="bg-tarbes-yellow text-tarbes-blue rounded-full w-28 h-28 md:w-36 md:h-36 flex flex-col items-center justify-center mx-auto shadow-xl z-10 relative border-4 border-white"><i class="fa-solid fa-person text-2xl md:text-3xl mb-1"></i><p class="font-bebas text-sm md:text-lg leading-none">CENTRO:</p><p class="font-bebas text-sm md:text-lg leading-none">LA PERSONA</p></div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
+                <div class="bg-tarbes-blue/5 rounded-xl p-4 text-center border border-tarbes-blue/10"><i class="fa-solid fa-cross text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-xs text-tarbes-blue">Hermanas / Directivos</p></div>
+                <div class="bg-tarbes-blue/5 rounded-xl p-4 text-center border border-tarbes-blue/10"><i class="fa-solid fa-chalkboard-user text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-xs text-tarbes-blue">Docentes</p></div>
+                <div class="bg-tarbes-blue/5 rounded-xl p-4 text-center border border-tarbes-blue/10"><i class="fa-solid fa-graduation-cap text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-xs text-tarbes-blue">Estudiantes</p></div>
+                <div class="bg-tarbes-blue/5 rounded-xl p-4 text-center border border-tarbes-blue/10"><i class="fa-solid fa-house-chimney text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-xs text-tarbes-blue">Familias</p></div>
+                <div class="bg-tarbes-blue/5 rounded-xl p-4 text-center border border-tarbes-blue/10"><i class="fa-solid fa-briefcase text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-xs text-tarbes-blue">Personal Administrativo</p></div>
+                <div class="bg-tarbes-blue/5 rounded-xl p-4 text-center border border-tarbes-blue/10"><i class="fa-solid fa-wrench text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-xs text-tarbes-blue">Personal de Mantenimiento</p></div>
+            </div>
+            <p class="text-center text-xs text-tarbes-lightblue mt-5">Ninguna comunidad, colegio o familia camina aisladamente. Vivimos la sinodalidad, uniendo a <strong>misioneras, directivos, docentes, administrativos, representantes, obreros y estudiantes</strong> como familia Tarbesiana.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ LÍNEA FUERZA ══════ -->
+<section id="linea-fuerza" class="py-14 md:py-24 bg-[#f8f9fa] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+            <div class="w-full lg:w-5/12 relative order-2 lg:order-1 px-4 md:px-0">
+                <div class="absolute -inset-2 bg-tarbes-yellow/20 rounded-3xl transform rotate-3"></div>
+                <!-- PLACEHOLDER: Foto de comunidad -->
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Comunidad" class="relative rounded-3xl shadow-2xl object-cover h-[300px] md:h-[450px] w-full z-10">
+                <div class="absolute -bottom-4 -right-4 bg-tarbes-blue text-white w-20 h-20 md:w-24 md:h-24 rounded-full flex flex-col items-center justify-center font-bebas text-sm md:text-lg border-4 border-white shadow-xl z-20"><span>LÍNEA</span><span class="text-tarbes-yellow">FUERZA</span></div>
+            </div>
+            <div class="w-full lg:w-7/12 order-1 lg:order-2">
+                <div class="bg-tarbes-blue/5 text-tarbes-blue inline-flex items-center px-3 py-1 rounded-full font-futura font-bold text-[10px] uppercase tracking-wider mb-4 border border-tarbes-blue/10"><i class="fa-solid fa-star text-tarbes-yellow mr-2"></i>Orientación Principal</div>
+                <h2 class="font-bebas text-3xl sm:text-4xl md:text-5xl tracking-wide mb-6 text-tarbes-dark leading-[1.1]">Educar para <span class="text-tarbes-blue">integrarse</span> al proceso socio-cultural</h2>
+                <div class="space-y-5">
+                    <div class="bg-white p-5 rounded-2xl shadow-lg shadow-tarbes-gray/40 border-l-4 border-tarbes-yellow"><h3 class="font-futura font-bold text-tarbes-blue mb-2 uppercase text-xs flex items-center"><span class="w-7 h-7 rounded-full bg-tarbes-yellow/20 flex items-center justify-center mr-2 shrink-0"><i class="fa-solid fa-bullseye text-tarbes-yellow text-[10px]"></i></span>¿Para Qué?</h3><ul class="text-xs space-y-1 text-tarbes-lightblue ml-9"><li>• Afrontar el cambio permanente y orgánico.</li><li>• Rescatar la identidad y valores nacionales y latinoamericanos.</li><li>• Cultivar y salvaguardar nuestra casa común (cf. LS 2015).</li><li>• Descubrir las "semillas del Verbo" (Aparecida #529).</li></ul></div>
+                    <div class="bg-white p-5 rounded-2xl shadow-lg shadow-tarbes-gray/40 border-l-4 border-tarbes-blue"><h3 class="font-futura font-bold text-tarbes-blue mb-2 uppercase text-xs flex items-center"><span class="w-7 h-7 rounded-full bg-tarbes-blue/10 flex items-center justify-center mr-2 shrink-0"><i class="fa-solid fa-hands-holding-circle text-tarbes-blue text-[10px]"></i></span>¿Cómo?</h3><ul class="text-xs space-y-1 text-tarbes-lightblue ml-9"><li>• Poniendo en el centro a la persona, su valor y dignidad.</li><li>• Formando personas al servicio de la comunidad (Hch. 20,35).</li><li>• Acciones concretas de defensa de los derechos del pueblo.</li><li>• "Educar y educarnos" para acoger a los más necesitados.</li></ul></div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Pedagogía Tarbesiana -->
-    <!-- Fondo azul oscuro con texto blanco para contraste -->
-    <section id="pedagogia" class="py-24 bg-tarbes-blue text-white relative">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-tarbes-yellow/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="font-bebas text-5xl md:text-6xl tracking-wide mb-4 text-white">PEDAGOGÍA <span class="text-tarbes-yellow">TARBESIANA</span></h2>
-                <div class="w-24 h-2 bg-tarbes-yellow mx-auto rounded-full"></div>
-                <p class="mt-6 font-montserrat text-white/80 max-w-2xl mx-auto text-lg font-light">
-                    Formar a las personas en la vida con Dios, enmarcados en los seis rasgos, desprendiéndose del Carisma y haciendo énfasis en Dios Trinidad.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Rasgo 1 -->
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all group">
-                    <div class="w-14 h-14 bg-tarbes-yellow rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-tarbes-yellow/30 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-fire text-2xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl mb-3 uppercase tracking-wide">1. Dinamismo Interior</h3>
-                    <p class="font-montserrat text-sm text-white/70 leading-relaxed">
-                        Fuente de audacia y alegría. "La insistencia del Espíritu Santo en el SER PARA DIOS...".
-                    </p>
-                </div>
-                <!-- Rasgo 2 -->
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all group">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-white/10 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-leaf text-2xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl mb-3 uppercase tracking-wide">2. Sencillez</h3>
-                    <p class="font-montserrat text-sm text-white/70 leading-relaxed">
-                        Supone verdad y humildad. Desarrollar cualidades, aceptar limitaciones y corregir debilidades para servir mejor.
-                    </p>
-                </div>
-                <!-- Rasgo 3 -->
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all group">
-                    <div class="w-14 h-14 bg-tarbes-yellow rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-tarbes-yellow/30 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-hands-holding-child text-2xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl mb-3 uppercase tracking-wide">3. Acogida</h3>
-                    <p class="font-montserrat text-sm text-white/70 leading-relaxed">
-                        Atención, disponibilidad y apertura a Dios, a su Palabra y a los acontecimientos que vive nuestro pueblo.
-                    </p>
-                </div>
-                <!-- Rasgo 4 -->
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all group">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-white/10 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-users text-2xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl mb-3 uppercase tracking-wide">4. Sentido Comunitario</h3>
-                    <p class="font-montserrat text-sm text-white/70 leading-relaxed">
-                        Signo de Comunión. Construir poco a poco la comunidad a imagen de la Trinidad y del hogar de Nazareth.
-                    </p>
-                </div>
-                <!-- Rasgo 5 -->
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all group">
-                    <div class="w-14 h-14 bg-tarbes-yellow rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-tarbes-yellow/30 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-rotate text-2xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl mb-3 uppercase tracking-wide">5. Conversión Constante</h3>
-                    <p class="font-montserrat text-sm text-white/70 leading-relaxed">
-                        Hacia el Reino, haciendo nuestra la preferencia de Dios por el mundo de los pobres. Un servicio generoso.
-                    </p>
-                </div>
-                <!-- Rasgo 6 -->
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all group">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-white/10 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-hand-holding-heart text-2xl text-tarbes-blue"></i>
-                    </div>
-                    <h3 class="font-futura font-bold text-xl mb-3 uppercase tracking-wide">6. Corazón Pobre</h3>
-                    <p class="font-montserrat text-sm text-white/70 leading-relaxed">
-                        Colaboración de todos para construir juntos el Reino de Dios, superando las injusticias por el Amor.
-                    </p>
-                </div>
-            </div>
+<!-- ══════ PEDAGOGÍA TARBESIANA ══════ -->
+<section id="pedagogia" class="py-14 md:py-24 bg-tarbes-blue text-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-52 h-52 bg-tarbes-yellow/10 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-10 md:mb-14"><h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl tracking-wide mb-3">PEDAGOGÍA <span class="text-tarbes-yellow">TARBESIANA</span></h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div><p class="mt-4 text-white/80 max-w-3xl mx-auto text-sm md:text-base font-light">Busca formar a las personas en la vida con Dios, enmarcada en los seis rasgos Tarbesianos, haciendo énfasis en Dios Trinidad y la construcción de la persona desde la interioridad.</p></div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 hover:bg-white/20 transition group"><div class="w-11 h-11 bg-tarbes-yellow rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-tarbes-yellow/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-fire text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-2 uppercase">1. Dinamismo Interior</h3><p class="text-xs text-white/70 leading-relaxed">"La insistencia del Espíritu Santo en el SER PARA DIOS...". Fuente de audacia y alegría que nos impulsa a ser una Iglesia en salida.</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 hover:bg-white/20 transition group"><div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fa-solid fa-leaf text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-2 uppercase">2. Sencillez</h3><p class="text-xs text-white/70 leading-relaxed">"Nuestra sencillez será para nuestros contemporáneos, el testimonio más vivo y el anuncio de Jesucristo."</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 hover:bg-white/20 transition group"><div class="w-11 h-11 bg-tarbes-yellow rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-tarbes-yellow/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-hands-holding-child text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-2 uppercase">3. Acogida</h3><p class="text-xs text-white/70 leading-relaxed">"COMUNICARNOS Y COMPARTIR esa experiencia de Dios en una intensa relación fraterna, testigos del Reino."</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 hover:bg-white/20 transition group"><div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fa-solid fa-users text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-2 uppercase">4. Sentido Comunitario</h3><p class="text-xs text-white/70 leading-relaxed">"Construir la comunidad a imagen de la Trinidad y del hogar de Nazareth, un lugar donde se comparte el amor de Dios."</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 hover:bg-white/20 transition group"><div class="w-11 h-11 bg-tarbes-yellow rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-tarbes-yellow/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-rotate text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-2 uppercase">5. Conversión Constante</h3><p class="text-xs text-white/70 leading-relaxed">"En comunión con la Iglesia universal y local; atentas a los sufrimientos y alegrías de las personas de hoy."</p></div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 md:p-7 border border-white/20 hover:bg-white/20 transition group"><div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fa-solid fa-hand-holding-heart text-lg text-tarbes-blue"></i></div><h3 class="font-futura font-bold text-base mb-2 uppercase">6. Corazón Pobre</h3><p class="text-xs text-white/70 leading-relaxed">"Al trabajar por la justicia, tratará de superar las injusticias creadas, por el Amor que todo lo transforma."</p></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Metodología (Diseño de Actividades) -->
-    <section id="metodologia" class="py-24 bg-[#f8f9fa]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-12 items-start">
-                <div class="lg:w-1/3 sticky top-32">
-                    <h2 class="font-bebas text-5xl md:text-6xl text-tarbes-blue tracking-wide mb-4 leading-none">DISEÑO DE <br>ACTIVIDADES</h2>
-                    <div class="w-16 h-2 bg-tarbes-yellow rounded-full mb-6"></div>
-                    <p class="font-montserrat text-sm text-tarbes-lightblue mb-8 leading-relaxed">
-                        Nuestra metodología formativa (E.R.E., encuentros, convivencias) se estructura en <strong>cinco pasos clave</strong> para propiciar resiliencia y comunión.
-                    </p>
-                    
-                    <!-- Botones de Pestañas -->
-                    <div class="flex flex-col space-y-3">
-                        <button onclick="openTab('tab1')" id="btn-tab1" class="tab-btn font-futura text-left px-6 py-4 rounded-xl font-bold bg-tarbes-blue text-white shadow-lg shadow-tarbes-blue/20 transition-all border border-transparent flex items-center justify-between">
-                            <span>1. Enraizados</span> <i class="fa-solid fa-chevron-right text-xs"></i>
-                        </button>
-                        <button onclick="openTab('tab2')" id="btn-tab2" class="tab-btn font-futura text-left px-6 py-4 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between">
-                            <span>2. Llamados</span> <i class="fa-solid fa-chevron-right text-xs opacity-0"></i>
-                        </button>
-                        <button onclick="openTab('tab3')" id="btn-tab3" class="tab-btn font-futura text-left px-6 py-4 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between">
-                            <span>3. S.P.D (Reflexión)</span> <i class="fa-solid fa-chevron-right text-xs opacity-0"></i>
-                        </button>
-                        <button onclick="openTab('tab4')" id="btn-tab4" class="tab-btn font-futura text-left px-6 py-4 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between">
-                            <span>4. Construir Comunión</span> <i class="fa-solid fa-chevron-right text-xs opacity-0"></i>
-                        </button>
-                        <button onclick="openTab('tab5')" id="btn-tab5" class="tab-btn font-futura text-left px-6 py-4 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between">
-                            <span>5. Evaluar</span> <i class="fa-solid fa-chevron-right text-xs opacity-0"></i>
-                        </button>
-                    </div>
+<!-- ══════ METODOLOGÍA ══════ -->
+<section id="metodologia" class="py-14 md:py-24 bg-[#f8f9fa]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-8 md:gap-12 items-start">
+            <div class="w-full lg:w-1/3 lg:sticky lg:top-36">
+                <h2 class="font-bebas text-4xl md:text-5xl text-tarbes-blue tracking-wide mb-3 leading-none">DISEÑO DE ACTIVIDADES</h2>
+                <div class="w-14 h-2 bg-tarbes-yellow rounded-full mb-5"></div>
+                <p class="text-xs md:text-sm text-tarbes-lightblue mb-6 leading-relaxed">Todo proceso formativo se diseñará siguiendo <strong>cinco pasos</strong> clave.</p>
+                <div class="flex overflow-x-auto lg:flex-col space-x-2 lg:space-x-0 lg:space-y-2 pb-3 lg:pb-0 no-scrollbar">
+                    <button onclick="openTab('tab1')" id="btn-tab1" class="tab-btn font-futura whitespace-nowrap lg:whitespace-normal text-left px-4 py-3 rounded-xl font-bold bg-tarbes-blue text-white shadow-lg transition-all border border-transparent flex items-center justify-between shrink-0 lg:shrink text-sm"><span>1. Enraizados</span><i class="fa-solid fa-chevron-right text-xs hidden lg:block"></i></button>
+                    <button onclick="openTab('tab2')" id="btn-tab2" class="tab-btn font-futura whitespace-nowrap lg:whitespace-normal text-left px-4 py-3 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between shrink-0 lg:shrink text-sm"><span>2. Llamados</span><i class="fa-solid fa-chevron-right text-xs opacity-0 hidden lg:block"></i></button>
+                    <button onclick="openTab('tab3')" id="btn-tab3" class="tab-btn font-futura whitespace-nowrap lg:whitespace-normal text-left px-4 py-3 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between shrink-0 lg:shrink text-sm"><span>3. S.P.D</span><i class="fa-solid fa-chevron-right text-xs opacity-0 hidden lg:block"></i></button>
+                    <button onclick="openTab('tab4')" id="btn-tab4" class="tab-btn font-futura whitespace-nowrap lg:whitespace-normal text-left px-4 py-3 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between shrink-0 lg:shrink text-sm"><span>4. Construir Comunión</span><i class="fa-solid fa-chevron-right text-xs opacity-0 hidden lg:block"></i></button>
+                    <button onclick="openTab('tab5')" id="btn-tab5" class="tab-btn font-futura whitespace-nowrap lg:whitespace-normal text-left px-4 py-3 rounded-xl font-bold bg-white text-tarbes-lightblue hover:bg-tarbes-gray/20 transition-all border border-tarbes-gray/50 flex items-center justify-between shrink-0 lg:shrink text-sm"><span>5. Evaluar</span><i class="fa-solid fa-chevron-right text-xs opacity-0 hidden lg:block"></i></button>
                 </div>
-                
-                <div class="lg:w-2/3 w-full">
-                    <!-- Usaremos una tarjeta elegante con una imagen de cabecera que cambia o es estática -->
-                    <div class="bg-white rounded-3xl shadow-xl shadow-tarbes-gray/30 border border-tarbes-gray/20 overflow-hidden min-h-[500px] flex flex-col">
-                        
-                        <!-- Imagen Placeholder representativa de metodología -->
-                        <div class="h-48 w-full relative">
-                            <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=1000&q=80" alt="Educación" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
-                        </div>
-
-                        <div class="p-8 lg:p-12 flex-grow relative -mt-10">
-                            <!-- Contenido Tab 1 -->
-                            <div id="tab1" class="tab-content active">
-                                <h3 class="font-bebas text-5xl text-tarbes-blue mb-1">1. ENRAIZADOS</h3>
-                                <p class="font-futura text-tarbes-yellow font-bold uppercase text-sm mb-6 tracking-wider bg-tarbes-yellow/10 inline-block px-3 py-1 rounded">Interioridad y Co-regulación</p>
-                                <p class="font-montserrat text-[15px] text-tarbes-lightblue mb-6 leading-relaxed">
-                                    <strong>Objetivo:</strong> Propiciar un espacio de interioridad, oración y regulación neurobiológica que permita arraigar la vida en Dios, favoreciendo la escucha atenta para conectar la temática con la realidad cotidiana.
-                                </p>
-                                <div class="bg-[#f8f9fa] p-6 rounded-2xl border-l-4 border-tarbes-blue">
-                                    <h4 class="font-bold text-tarbes-dark mb-3 text-sm flex items-center"><i class="fa-solid fa-check-circle text-tarbes-blue mr-2"></i> Criterios Clave</h4>
-                                    <ul class="list-disc pl-5 font-montserrat text-[14px] text-tarbes-lightblue space-y-2">
-                                        <li>Iniciar con recogimiento y oración vinculado a la vida práctica.</li>
-                                        <li>Música instrumental y respiración guiada (calmar estrés postraumático).</li>
-                                        <li>Alfabetización emocional: reconocer y aceptar el estado interior.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Contenido Tab 2 -->
-                            <div id="tab2" class="tab-content">
-                                <h3 class="font-bebas text-5xl text-tarbes-blue mb-1">2. LLAMADOS</h3>
-                                <p class="font-futura text-tarbes-yellow font-bold uppercase text-sm mb-6 tracking-wider bg-tarbes-yellow/10 inline-block px-3 py-1 rounded">Experiencia Integradora / Juntos</p>
-                                <p class="font-montserrat text-[15px] text-tarbes-lightblue mb-6 leading-relaxed">
-                                    <strong>Objetivo:</strong> Provocar una experiencia a través de una vivencia integradora que involucre lo cognitivo, emocional y espiritual, movilizando al participante de la desesperanza hacia una respuesta activa.
-                                </p>
-                                <div class="bg-[#f8f9fa] p-6 rounded-2xl border-l-4 border-tarbes-blue">
-                                    <h4 class="font-bold text-tarbes-dark mb-3 text-sm flex items-center"><i class="fa-solid fa-check-circle text-tarbes-blue mr-2"></i> Criterios Clave</h4>
-                                    <ul class="list-disc pl-5 font-montserrat text-[14px] text-tarbes-lightblue space-y-2">
-                                        <li>Diseñar un momento vivencial y dinámico, no solo discursivo.</li>
-                                        <li>Mover al participante a una postura activa, sintonizando con Dios.</li>
-                                        <li>Actividades lúdicas cooperativas que inspiren confianza interpersonal.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Contenido Tab 3 -->
-                            <div id="tab3" class="tab-content">
-                                <h3 class="font-bebas text-5xl text-tarbes-blue mb-1">3. S.P.D</h3>
-                                <p class="font-futura text-tarbes-yellow font-bold uppercase text-sm mb-6 tracking-wider bg-tarbes-yellow/10 inline-block px-3 py-1 rounded">Ser Para Dios y Para los Demás</p>
-                                <p class="font-montserrat text-[15px] text-tarbes-lightblue mb-6 leading-relaxed">
-                                    <strong>Objetivo:</strong> Madurar la experiencia a través del discernimiento crítico y el diálogo reflexivo. Pasar del "qué hicimos" al "qué nos está diciendo esto en lo profundo".
-                                </p>
-                                <div class="bg-[#f8f9fa] p-6 rounded-2xl border-l-4 border-tarbes-blue">
-                                    <h4 class="font-bold text-tarbes-dark mb-3 text-sm flex items-center"><i class="fa-solid fa-check-circle text-tarbes-blue mr-2"></i> Criterios Clave</h4>
-                                    <ul class="list-disc pl-5 font-montserrat text-[14px] text-tarbes-lightblue space-y-2">
-                                        <li>Discernimiento, Palabra de Dios, pensamiento crítico.</li>
-                                        <li>Confrontar lo vivido con la compasión activa (Buen Samaritano).</li>
-                                        <li>Empatía profunda y escucha activa para validar el dolor sin juicios.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Contenido Tab 4 -->
-                            <div id="tab4" class="tab-content">
-                                <h3 class="font-bebas text-5xl text-tarbes-blue mb-1">4. CONSTRUIR COMUNIÓN</h3>
-                                <p class="font-futura text-tarbes-yellow font-bold uppercase text-sm mb-6 tracking-wider bg-tarbes-yellow/10 inline-block px-3 py-1 rounded">Compromiso y Estar en salida - Arriesgar</p>
-                                <p class="font-montserrat text-[15px] text-tarbes-lightblue mb-6 leading-relaxed">
-                                    <strong>Objetivo:</strong> Impulsar que el encuentro genere transformación visible en el entorno, promoviendo la ecología integral y la corresponsabilidad como Tarbesianos en salida.
-                                </p>
-                                <div class="bg-[#f8f9fa] p-6 rounded-2xl border-l-4 border-tarbes-blue">
-                                    <h4 class="font-bold text-tarbes-dark mb-3 text-sm flex items-center"><i class="fa-solid fa-check-circle text-tarbes-blue mr-2"></i> Criterios Clave</h4>
-                                    <ul class="list-disc pl-5 font-montserrat text-[14px] text-tarbes-lightblue space-y-2">
-                                        <li>Compromisos concretos, medibles y realizables a corto plazo.</li>
-                                        <li>Acuerdos operativos: jornadas de escucha, cuidar la casa común.</li>
-                                        <li>Canalizar la empatía hacia el cuidado activo de los vulnerables.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Contenido Tab 5 -->
-                            <div id="tab5" class="tab-content">
-                                <h3 class="font-bebas text-5xl text-tarbes-blue mb-1">5. EVALUAR</h3>
-                                <p class="font-futura text-tarbes-yellow font-bold uppercase text-sm mb-6 tracking-wider bg-tarbes-yellow/10 inline-block px-3 py-1 rounded">Celebración, Gratitud y Síntesis</p>
-                                <p class="font-montserrat text-[15px] text-tarbes-lightblue mb-6 leading-relaxed">
-                                    <strong>Objetivo:</strong> Recoger los frutos para constatar el impacto formativo, espiritual y comunitario, celebrando con gratitud sinodal el paso de Dios por la vida de los participantes.
-                                </p>
-                                <div class="bg-[#f8f9fa] p-6 rounded-2xl border-l-4 border-tarbes-blue">
-                                    <h4 class="font-bold text-tarbes-dark mb-3 text-sm flex items-center"><i class="fa-solid fa-check-circle text-tarbes-blue mr-2"></i> Criterios Clave</h4>
-                                    <ul class="list-disc pl-5 font-montserrat text-[14px] text-tarbes-lightblue space-y-2">
-                                        <li>Evaluar desde el corazón y la razón, midiendo la conexión interior.</li>
-                                        <li>La evaluación como rito de cierre, un momento de "cosecha".</li>
-                                        <li>Metacognición compasiva y resiliencia celebrativa.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+            <div class="w-full lg:w-2/3">
+                <div class="bg-white rounded-3xl shadow-xl border border-tarbes-gray/20 overflow-hidden min-h-[400px] flex flex-col">
+                    <!-- PLACEHOLDER: Foto de aula/momento pastoral -->
+                    <div class="h-28 md:h-40 w-full relative"><img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=1000&q=80" alt="Educación" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div></div>
+                    <div class="p-5 md:p-8 lg:p-10 flex-grow relative -mt-4 md:-mt-8">
+                        <div id="tab1" class="tab-content active"><h3 class="font-bebas text-3xl md:text-4xl text-tarbes-blue mb-1">1. ENRAIZADOS</h3><p class="font-futura text-tarbes-yellow font-bold uppercase text-[10px] md:text-xs mb-3 tracking-wider bg-tarbes-yellow/10 inline-block px-2 py-1 rounded">Interioridad y Co-regulación</p><p class="text-xs md:text-[13px] text-tarbes-lightblue mb-3 leading-relaxed"><strong>Objetivo:</strong> Propiciar un espacio de interioridad, oración y regulación neurobiológica que permita arraigar la vida en Dios.</p><p class="text-[11px] text-tarbes-blue font-semibold mb-3">Clave: Interioridad, espacios de silencio, toma de conciencia de nuestro ser en Dios.</p><div class="space-y-3"><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-blue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-chalkboard-user text-tarbes-blue mr-1"></i>Pedagógicos</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Recogimiento y oración desde la Cultura del Buen Trato.</li><li>Música instrumental y respiración guiada.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-yellow"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-cross text-tarbes-yellow mr-1"></i>Pastorales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Espiritualidad del Corazón de Cristo (Dilexit Nos) y Magnifica Humanitas.</li><li>Carisma trinitario SJT como refugio de esperanza.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-lightblue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-brain text-tarbes-lightblue mr-1"></i>Psicoemocionales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Regulación y contención emocional (manejo del miedo).</li><li>Alfabetización emocional: reconocer y ofrecer el estado interior.</li></ul></div></div></div>
+                        <div id="tab2" class="tab-content"><h3 class="font-bebas text-3xl md:text-4xl text-tarbes-blue mb-1">2. LLAMADOS</h3><p class="font-futura text-tarbes-yellow font-bold uppercase text-[10px] md:text-xs mb-3 tracking-wider bg-tarbes-yellow/10 inline-block px-2 py-1 rounded">Experiencia Integradora / Juntos</p><p class="text-xs md:text-[13px] text-tarbes-lightblue mb-3 leading-relaxed"><strong>Objetivo:</strong> Provocar una vivencia integradora cognitiva, emocional y espiritual, movilizando de la desesperanza hacia una respuesta activa.</p><p class="text-[11px] text-tarbes-blue font-semibold mb-3">Clave: Apertura, audacia, creatividad, innovación y existencia encarnada.</p><div class="space-y-3"><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-blue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-chalkboard-user text-tarbes-blue mr-1"></i>Pedagógicos</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Momento vivencial y dinámico, no solo discursivo.</li><li>Actividades lúdicas cooperativas que desafíen e inspiren.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-yellow"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-cross text-tarbes-yellow mr-1"></i>Pastorales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Audacia de "nacer de nuevo en el Espíritu" (Jn 3,1-8).</li><li>Carisma tarbesiano: responder con audacia a las urgencias.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-lightblue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-brain text-tarbes-lightblue mr-1"></i>Psicoemocionales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Flexibilidad cognitiva y pensamiento lateral.</li><li>Autoeficacia y superación del estancamiento emocional.</li></ul></div></div></div>
+                        <div id="tab3" class="tab-content"><h3 class="font-bebas text-3xl md:text-4xl text-tarbes-blue mb-1">3. S.P.D</h3><p class="font-futura text-tarbes-yellow font-bold uppercase text-[10px] md:text-xs mb-3 tracking-wider bg-tarbes-yellow/10 inline-block px-2 py-1 rounded">Ser Para Dios y Para los Demás</p><p class="text-xs md:text-[13px] text-tarbes-lightblue mb-3 leading-relaxed"><strong>Objetivo:</strong> Madurar la experiencia a través del discernimiento crítico. Pasar del "qué hicimos" al "qué nos está diciendo esto en lo profundo".</p><p class="text-[11px] text-tarbes-blue font-semibold mb-3">Clave: Discernimiento, Palabra de Dios, pensamiento crítico, comunidad.</p><div class="space-y-3"><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-blue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-chalkboard-user text-tarbes-blue mr-1"></i>Pedagógicos</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Espacio individual y luego en pequeños grupos con preguntas de interiorización.</li><li>Confrontar con la Palabra (Lc 10,25-37). Dar tiempo al silencio.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-yellow"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-cross text-tarbes-yellow mr-1"></i>Pastorales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Iluminado por Fratelli Tutti y Evangelii Gaudium.</li><li>Carisma eucarístico: ser "partidos y compartidos" en mesa común.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-lightblue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-brain text-tarbes-lightblue mr-1"></i>Psicoemocionales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Empatía profunda y escucha activa sin juicios.</li><li>Análisis crítico contra narrativas de desesperanza.</li></ul></div></div></div>
+                        <div id="tab4" class="tab-content"><h3 class="font-bebas text-3xl md:text-4xl text-tarbes-blue mb-1">4. CONSTRUIR COMUNIÓN</h3><p class="font-futura text-tarbes-yellow font-bold uppercase text-[10px] md:text-xs mb-3 tracking-wider bg-tarbes-yellow/10 inline-block px-2 py-1 rounded">Compromiso y Estar en salida — Arriesgar</p><p class="text-xs md:text-[13px] text-tarbes-lightblue mb-3 leading-relaxed"><strong>Objetivo:</strong> Que el encuentro genere transformación visible, promoviendo la ecología integral y la corresponsabilidad.</p><p class="text-[11px] text-tarbes-blue font-semibold mb-3">Clave: Transformación, compromiso, salida, ecología integral y amistad social.</p><div class="space-y-3"><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-blue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-chalkboard-user text-tarbes-blue mr-1"></i>Pedagógicos</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Compromisos concretos, medibles y realizables a corto plazo.</li><li>Proyección Social — Tarbesianos en salida bajo LOPNNA.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-yellow"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-cross text-tarbes-yellow mr-1"></i>Pastorales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Ecología integral (Laudato Si') y Pacto Educativo Global.</li><li>Sencillez activa SJT: fe como servicio al bien común.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-lightblue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-brain text-tarbes-lightblue mr-1"></i>Psicoemocionales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Sentido de agencia comunitaria y trascendencia social.</li><li>Compromiso ético y resiliencia solidaria.</li></ul></div></div></div>
+                        <div id="tab5" class="tab-content"><h3 class="font-bebas text-3xl md:text-4xl text-tarbes-blue mb-1">5. EVALUAR</h3><p class="font-futura text-tarbes-yellow font-bold uppercase text-[10px] md:text-xs mb-3 tracking-wider bg-tarbes-yellow/10 inline-block px-2 py-1 rounded">Celebración, Gratitud y Síntesis</p><p class="text-xs md:text-[13px] text-tarbes-lightblue mb-3 leading-relaxed"><strong>Objetivo:</strong> Recoger los frutos, constatar el impacto y celebrar con gratitud sinodal el paso de Dios.</p><p class="text-[11px] text-tarbes-blue font-semibold mb-3">Clave: Gratitud, discernimiento del impacto, mejora continua, celebración sinodal.</p><div class="space-y-3"><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-blue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-chalkboard-user text-tarbes-blue mr-1"></i>Pedagógicos</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Evaluar desde el corazón y la razón. Un rito de "cosecha" colectiva.</li><li>Preguntas metacognitivas: ¿Qué aprendí? ¿Cómo lo viví? ¿Qué me llevo?</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-yellow"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-cross text-tarbes-yellow mr-1"></i>Pastorales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Perspectiva sinodal y alegría de Hch 2,42-47.</li><li>Protección de Nuestra Señora de Lourdes y espíritu de familia.</li></ul></div><div class="bg-[#f8f9fa] p-4 rounded-xl border-l-4 border-tarbes-lightblue"><h4 class="font-bold text-tarbes-dark mb-1 text-xs"><i class="fa-solid fa-brain text-tarbes-lightblue mr-1"></i>Psicoemocionales</h4><ul class="list-disc pl-4 text-[11px] text-tarbes-lightblue space-y-1"><li>Metacognición compasiva: autoevaluarse sin autoexigencias desmedidas.</li><li>Resiliencia celebrativa y gratitud para fortalecer la esperanza.</li></ul></div></div><!-- Herramientas sugeridas --><div class="mt-5 pt-4 border-t border-tarbes-gray/30"><h4 class="font-futura font-bold text-tarbes-blue text-xs uppercase mb-3"><i class="fa-solid fa-toolbox mr-1"></i> Herramientas Sugeridas</h4><div class="grid grid-cols-2 gap-2"><div class="bg-tarbes-yellow/10 rounded-lg p-3 text-center"><i class="fa-solid fa-tree text-tarbes-yellow text-lg mb-1"></i><p class="font-futura font-bold text-[10px] text-tarbes-blue">El Árbol de los Frutos</p></div><div class="bg-tarbes-blue/5 rounded-lg p-3 text-center"><i class="fa-solid fa-clipboard-check text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-[10px] text-tarbes-blue">Rúbricas Tarbesianas</p></div><div class="bg-tarbes-yellow/10 rounded-lg p-3 text-center"><i class="fa-solid fa-pray text-tarbes-yellow text-lg mb-1"></i><p class="font-futura font-bold text-[10px] text-tarbes-blue">Oración y Rito de Envío</p></div><div class="bg-tarbes-blue/5 rounded-lg p-3 text-center"><i class="fa-solid fa-map text-tarbes-blue text-lg mb-1"></i><p class="font-futura font-bold text-[10px] text-tarbes-blue">Mapa de la Esperanza</p></div></div></div></div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Momentos Pedagógicos -->
-    <section id="momentos" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-bebas text-5xl md:text-6xl text-tarbes-blue tracking-wide mb-4">MOMENTOS PEDAGÓGICOS <span class="text-tarbes-yellow">2026-2027</span></h2>
-                <div class="w-24 h-2 bg-tarbes-yellow mx-auto rounded-full mb-6"></div>
-                <p class="font-montserrat text-tarbes-lightblue max-w-2xl mx-auto text-lg">
-                    Planificación estructurada para acompañar a la Comunidad Educativa a lo largo del año escolar.
-                </p>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Momento 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-tarbes-gray/40 border border-tarbes-gray/20 hover-lift flex flex-col">
-                    <div class="h-48 bg-tarbes-blue relative">
-                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dinamismo Interior" class="w-full h-full object-cover mix-blend-overlay opacity-60">
-                        <div class="absolute bottom-4 left-6 bg-white text-tarbes-blue font-futura font-bold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">Septiembre a Diciembre</div>
-                    </div>
-                    <div class="p-8 flex-grow">
-                        <h3 class="font-bebas text-4xl mb-1 text-tarbes-dark">PRIMER MOMENTO</h3>
-                        <p class="font-futura font-bold text-sm text-tarbes-yellow mb-4 uppercase tracking-wide">Dinamismo Interior</p>
-                        <p class="font-montserrat text-sm text-tarbes-lightblue leading-relaxed">
-                            De la emergencia a la co-regulación afectiva. Impulsar el dinamismo interior y la resiliencia espiritual para afrontar el trauma post-sismo y la vulnerabilidad social.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Momento 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-tarbes-gray/40 border border-tarbes-gray/20 hover-lift flex flex-col">
-                    <div class="h-48 bg-tarbes-yellow relative">
-                        <img src="https://images.unsplash.com/photo-1529156069898-49953eb1b5a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sentido Comunitario" class="w-full h-full object-cover mix-blend-multiply opacity-50">
-                        <div class="absolute bottom-4 left-6 bg-tarbes-blue text-white font-futura font-bold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">Enero a Marzo</div>
-                    </div>
-                    <div class="p-8 flex-grow">
-                        <h3 class="font-bebas text-4xl mb-1 text-tarbes-dark">SEGUNDO MOMENTO</h3>
-                        <p class="font-futura font-bold text-sm text-tarbes-blue mb-4 uppercase tracking-wide">Sentido Comunitario</p>
-                        <p class="font-montserrat text-sm text-tarbes-lightblue leading-relaxed">
-                            Fortalecer el tejido comunitario-escolar y la fraternidad activa frente al aislamiento social, viviendo la Cuaresma como camino comunitario de conversión.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Momento 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-tarbes-gray/40 border border-tarbes-gray/20 hover-lift flex flex-col">
-                    <div class="h-48 bg-tarbes-lightblue relative">
-                        <img src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Acogida" class="w-full h-full object-cover mix-blend-overlay opacity-60">
-                        <div class="absolute bottom-4 left-6 bg-white text-tarbes-blue font-futura font-bold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">Abril a Julio</div>
-                    </div>
-                    <div class="p-8 flex-grow">
-                        <h3 class="font-bebas text-4xl mb-1 text-tarbes-dark">TERCER MOMENTO</h3>
-                        <p class="font-futura font-bold text-sm text-tarbes-yellow mb-4 uppercase tracking-wide">Acogida</p>
-                        <p class="font-montserrat text-sm text-tarbes-lightblue leading-relaxed">
-                            Consolidar los frutos del año escolar mediante la acogida incondicional y la proyección social transformadora, proyectando líderes juveniles agentes de cambio.
-                        </p>
-                    </div>
-                </div>
-            </div>
+<!-- ══════ MOMENTOS PEDAGÓGICOS ══════ -->
+<section id="momentos" class="py-14 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10 md:mb-14"><h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl text-tarbes-blue tracking-wide mb-3">MOMENTOS PEDAGÓGICOS <span class="text-tarbes-yellow">2026-2027</span></h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full mb-3"></div><p class="text-tarbes-lightblue max-w-2xl mx-auto text-sm md:text-base">El año Pastoral-Escolar se divide en tres grandes momentos pedagógicos.</p></div>
+        <div class="space-y-6">
+            <!-- Momento 1 -->
+            <div class="bg-white rounded-3xl shadow-xl border border-tarbes-gray/20 overflow-hidden"><div class="h-3 bg-tarbes-blue"></div><div class="p-5 md:p-8"><div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8"><div class="md:w-1/3"><span class="bg-tarbes-blue/10 text-tarbes-blue font-futura font-bold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Sep — Dic</span><h3 class="font-bebas text-3xl md:text-4xl mt-2 mb-1">PRIMER MOMENTO</h3><p class="font-futura font-bold text-xs text-tarbes-yellow uppercase">"Arraigados en el Espíritu"</p><p class="text-xs text-tarbes-lightblue mt-2"><strong class="text-tarbes-blue">Rasgo:</strong> Dinamismo Interior</p><p class="text-xs text-tarbes-lightblue"><strong class="text-tarbes-blue">Kerigma:</strong> <em>"El Espíritu del Señor está sobre mí"</em> (Lc 4,18)</p><p class="text-xs text-tarbes-lightblue"><strong class="text-tarbes-blue">Perfil Docente:</strong> Maestro que <strong>sana</strong></p></div><div class="md:w-2/3"><p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed mb-3">De la emergencia a la co-regulación afectiva. Impulsar el dinamismo interior y la resiliencia espiritual ante la situación postraumática como primer paso para "renacer en el Espíritu".</p><p class="text-xs text-tarbes-lightblue mb-2"><strong class="text-tarbes-blue">Meta:</strong> Crear un espacio seguro de escucha, oración y acompañamiento que permita nombrar el dolor, restaurar la confianza y abrir el corazón a la acción del Espíritu.</p><div class="bg-tarbes-blue/5 rounded-xl p-4 mt-3"><p class="font-futura font-bold text-[10px] text-tarbes-blue uppercase mb-2">Temáticas sugeridas</p><div class="flex flex-wrap gap-1"><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">¿Quiénes somos a la luz del Espíritu?</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Emociones al servicio de la fe</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Renacer después del dolor</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Oración que sana</span></div></div></div></div></div></div>
+            <!-- Momento 2 -->
+            <div class="bg-white rounded-3xl shadow-xl border border-tarbes-gray/20 overflow-hidden"><div class="h-3 bg-tarbes-yellow"></div><div class="p-5 md:p-8"><div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8"><div class="md:w-1/3"><span class="bg-tarbes-yellow/20 text-tarbes-blue font-futura font-bold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Ene — Mar</span><h3 class="font-bebas text-3xl md:text-4xl mt-2 mb-1">SEGUNDO MOMENTO</h3><p class="font-futura font-bold text-xs text-tarbes-blue uppercase">"Caminar juntos, servir juntos"</p><p class="text-xs text-tarbes-lightblue mt-2"><strong class="text-tarbes-blue">Rasgo:</strong> Sentido Comunitario</p><p class="text-xs text-tarbes-lightblue"><strong class="text-tarbes-blue">Kerigma:</strong> <em>"Comunidad que comparte y se sostiene"</em> (Hch 2,44-47)</p><p class="text-xs text-tarbes-lightblue"><strong class="text-tarbes-blue">Perfil Docente:</strong> Maestro que <strong>construye</strong></p></div><div class="md:w-2/3"><p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed mb-3">Del aislamiento al encuentro restaurador. Fortalecer el tejido comunitario-escolar y la fraternidad activa, viviendo la Cuaresma como camino comunitario de conversión (Mt 18,20).</p><p class="text-xs text-tarbes-lightblue mb-2"><strong class="text-tarbes-blue">Meta:</strong> Generar experiencias de encuentro comunitario que fortalezcan la fraternidad, confianza y corresponsabilidad.</p><div class="bg-tarbes-yellow/10 rounded-xl p-4 mt-3"><p class="font-futura font-bold text-[10px] text-tarbes-blue uppercase mb-2">Temáticas sugeridas</p><div class="flex flex-wrap gap-1"><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Jesús camina con nosotros</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">¡Vamos juntos!</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Comunidad desde la diversidad</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Mirar al otro como hermano</span></div></div></div></div></div></div>
+            <!-- Momento 3 -->
+            <div class="bg-white rounded-3xl shadow-xl border border-tarbes-gray/20 overflow-hidden"><div class="h-3 bg-tarbes-lightblue"></div><div class="p-5 md:p-8"><div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8"><div class="md:w-1/3"><span class="bg-tarbes-lightblue/20 text-tarbes-blue font-futura font-bold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Abr — Jul</span><h3 class="font-bebas text-3xl md:text-4xl mt-2 mb-1">TERCER MOMENTO</h3><p class="font-futura font-bold text-xs text-tarbes-yellow uppercase">"Frutos del Espíritu"</p><p class="text-xs text-tarbes-lightblue mt-2"><strong class="text-tarbes-blue">Rasgo:</strong> Acogida</p><p class="text-xs text-tarbes-lightblue"><strong class="text-tarbes-blue">Kerigma:</strong> <em>"Todo el cuerpo crece y se edifica en el amor"</em> (Ef 4,16)</p><p class="text-xs text-tarbes-lightblue"><strong class="text-tarbes-blue">Perfil Docente:</strong> Maestro que <strong>inspira</strong></p></div><div class="md:w-2/3"><p class="text-xs md:text-sm text-tarbes-lightblue leading-relaxed mb-3">De la resiliencia a la transformación social. Consolidar los frutos mediante la acogida incondicional y la proyección social transformadora, proyectando líderes juveniles agentes de cambio.</p><p class="text-xs text-tarbes-lightblue mb-2"><strong class="text-tarbes-blue">Meta:</strong> Proyectar la comunidad educativa como signo de esperanza y acogida desde el carisma tarbesiano.</p><div class="bg-tarbes-lightblue/10 rounded-xl p-4 mt-3"><p class="font-futura font-bold text-[10px] text-tarbes-blue uppercase mb-2">Temáticas sugeridas</p><div class="flex flex-wrap gap-1"><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Ser signo de esperanza</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">De recibir a dar: misión y servicio</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Líderes del Espíritu</span><span class="bg-white text-tarbes-lightblue text-[10px] px-2 py-1 rounded-full border border-tarbes-gray/30">Alimentar la vida interior para servir</span></div></div></div></div></div></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="bg-tarbes-dark text-white pt-16 pb-8 border-t-[8px] border-tarbes-yellow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-10 mb-12">
-                <div class="flex flex-col items-center md:items-start space-y-4">
-                    <div class="bg-white/10 p-3 rounded-2xl backdrop-blur-sm">
-                        <img src="assets/logo-sjt-blanco.png" alt="Logo SJT Blanco" class="h-20" onerror="this.src='https://via.placeholder.com/80x80?text=SJT'">
-                    </div>
-                    <div class="font-bebas text-2xl tracking-wide mt-2">
-                        HERMANAS DE SAN JOSÉ DE TARBES
-                    </div>
-                </div>
-                
-                <div class="text-center md:text-right font-montserrat text-sm text-white/70 space-y-2">
-                    <p class="font-bold text-white text-lg font-futura">Provincia de Venezuela-México</p>
-                    <p>Proyecto Pastoral Educativo 2026-2027</p>
-                    <div class="flex gap-4 justify-center md:justify-end mt-4">
-                        <span class="bg-tarbes-blue px-3 py-1 rounded-full text-xs font-bold text-white/90">#TARBESIANIZATE</span>
-                        <span class="bg-tarbes-blue px-3 py-1 rounded-full text-xs font-bold text-white/90">#CorazonesTarbesianos</span>
-                    </div>
-                </div>
-            </div>
+<!-- ══════ CRONOGRAMA DE ACTIVIDADES ══════ -->
+<section id="cronograma" class="py-14 md:py-24 bg-[#f8f9fa] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-10 md:mb-16">
+            <h2 class="font-bebas text-4xl md:text-5xl lg:text-6xl text-tarbes-blue tracking-wide mb-3">CRONOGRAMA <span class="text-tarbes-yellow">PASTORAL</span></h2>
+            <div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full mb-3"></div>
+            <p class="text-tarbes-lightblue max-w-2xl mx-auto text-sm md:text-base">Nuestra ruta de encuentros, celebraciones y retiros para el año escolar 2026-2027.</p>
+        </div>
+        
+        <div class="relative mx-auto max-w-5xl">
+            <!-- Línea vertical central -->
+            <div class="absolute left-4 md:left-1/2 h-full w-1 bg-tarbes-gray/30 transform md:-translate-x-1/2 rounded-full"></div>
             
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 font-montserrat">
-                <p>© 2026 Hermanas de San José de Tarbes. Todos los derechos reservados.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook text-xl"></i></a>
-                </div>
+            <!-- Contenedor dinámico -->
+            <div id="timeline-container" class="space-y-6 md:space-y-8 pb-4">
+                <!-- Se llena con JS -->
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Script Interacciones -->
-    <script>
-        function openTab(tabId) {
-            // Ocultar todos los contenidos
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
+<!-- ══════ EVALUACIÓN Y SEGUIMIENTO ══════ -->
+<section class="py-14 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10"><h2 class="font-bebas text-4xl md:text-5xl text-tarbes-blue tracking-wide mb-3">EVALUACIÓN Y <span class="text-tarbes-yellow">SEGUIMIENTO</span></h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div><p class="mt-4 text-tarbes-lightblue text-sm max-w-2xl mx-auto">La evaluación se concibe como un rito de gratitud y discernimiento comunitario, a través de indicadores cualitativos y cuantitativos.</p></div>
+        <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-white rounded-2xl p-5 shadow-md border border-tarbes-gray/20 border-l-4 border-l-tarbes-blue"><div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-heart-pulse text-tarbes-blue"></i><h3 class="font-futura font-bold text-sm text-tarbes-blue">Bienestar Emocional</h3></div><ul class="text-[11px] text-tarbes-lightblue space-y-1"><li>• Reducción de indicadores de estrés post-sismo.</li><li>• Participación en talleres de Primeros Auxilios Psicológicos.</li></ul></div>
+            <div class="bg-white rounded-2xl p-5 shadow-md border border-tarbes-gray/20 border-l-4 border-l-tarbes-yellow"><div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-school text-tarbes-yellow"></i><h3 class="font-futura font-bold text-sm text-tarbes-blue">Clima Escolar</h3></div><ul class="text-[11px] text-tarbes-lightblue space-y-1"><li>• 100% de protocolos de buen trato (AVEC-LOPNNA) aplicados.</li><li>• Mejora en resolución pacífica de conflictos.</li></ul></div>
+            <div class="bg-white rounded-2xl p-5 shadow-md border border-tarbes-gray/20 border-l-4 border-l-tarbes-blue"><div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-people-arrows text-tarbes-blue"></i><h3 class="font-futura font-bold text-sm text-tarbes-blue">Participación Pastoral</h3></div><ul class="text-[11px] text-tarbes-lightblue space-y-1"><li>• Involucramiento de familias en Escuelas de Familias y celebraciones.</li><li>• Consolidación de Grupos Infantiles y Juveniles Tarbesianos.</li></ul></div>
+            <div class="bg-white rounded-2xl p-5 shadow-md border border-tarbes-gray/20 border-l-4 border-l-tarbes-yellow"><div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-cross text-tarbes-yellow"></i><h3 class="font-futura font-bold text-sm text-tarbes-blue">Carisma SJT</h3></div><ul class="text-[11px] text-tarbes-lightblue space-y-1"><li>• Apropiación de los 6 rasgos en planificaciones de E.R.E.</li><li>• Proyectos de Aprendizaje-Servicio vinculados al carisma.</li></ul></div>
+        </div>
+    </div>
+</section>
 
-            // Resetear estilos de botones
-            const btns = document.querySelectorAll('.tab-btn');
-            btns.forEach(btn => {
-                btn.classList.remove('bg-tarbes-blue', 'text-white', 'shadow-lg', 'shadow-tarbes-blue/20', 'border-transparent');
-                btn.classList.add('bg-white', 'text-tarbes-lightblue', 'border-tarbes-gray/50');
-                // Ocultar el icon chevron
-                const icon = btn.querySelector('i');
-                if(icon) icon.classList.add('opacity-0');
-            });
+<!-- ══════ DESCARGA DE DOCUMENTOS ══════ -->
+<section id="documentos" class="py-14 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10"><h2 class="font-bebas text-4xl md:text-5xl text-tarbes-blue tracking-wide mb-3">DOCUMENTOS OFICIALES</h2><div class="w-20 h-2 bg-tarbes-yellow mx-auto rounded-full"></div><p class="mt-4 text-tarbes-lightblue text-sm max-w-xl mx-auto">Descarga los documentos completos en formato PDF.</p></div>
+        <div class="grid sm:grid-cols-2 gap-5">
+            <a href="public/documents/1.BASES Y FUNDAMENTOS PROYECTO PASTORAL SJT(2026-2027).pdf" download class="bg-[#f8f9fa] rounded-2xl p-6 shadow-md border border-tarbes-gray/20 hover-lift flex flex-col items-center text-center group"><div class="w-14 h-14 bg-tarbes-blue/10 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-tarbes-blue transition"><i class="fa-solid fa-file-pdf text-2xl text-tarbes-blue group-hover:text-white transition"></i></div><h3 class="font-futura font-bold text-tarbes-blue mb-1 uppercase text-xs">Bases y Fundamentos</h3><p class="text-[10px] text-tarbes-lightblue mb-3">Proyecto Pastoral SJT (2026-2027)</p><span class="mt-auto bg-tarbes-yellow text-tarbes-blue px-4 py-2 rounded-full font-bold text-[10px] uppercase tracking-wider group-hover:bg-tarbes-blue group-hover:text-white transition"><i class="fa-solid fa-download mr-1"></i>Descargar</span></a>
+            <a href="public/documents/2.PLAN PASTORAL 2026-2027 consolidado.pdf" download class="bg-[#f8f9fa] rounded-2xl p-6 shadow-md border border-tarbes-gray/20 hover-lift flex flex-col items-center text-center group"><div class="w-14 h-14 bg-tarbes-yellow/20 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-tarbes-blue transition"><i class="fa-solid fa-file-pdf text-2xl text-tarbes-blue group-hover:text-white transition"></i></div><h3 class="font-futura font-bold text-tarbes-blue mb-1 uppercase text-xs">Plan Pastoral Consolidado</h3><p class="text-[10px] text-tarbes-lightblue mb-3">2026-2027 — Documento Completo</p><span class="mt-auto bg-tarbes-yellow text-tarbes-blue px-4 py-2 rounded-full font-bold text-[10px] uppercase tracking-wider group-hover:bg-tarbes-blue group-hover:text-white transition"><i class="fa-solid fa-download mr-1"></i>Descargar</span></a>
+        </div>
+    </div>
+</section>
 
-            // Activar tab y botón correspondiente
-            document.getElementById(tabId).classList.add('active');
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.remove('bg-white', 'text-tarbes-lightblue', 'border-tarbes-gray/50');
-            activeBtn.classList.add('bg-tarbes-blue', 'text-white', 'shadow-lg', 'shadow-tarbes-blue/20', 'border-transparent');
-            // Mostrar icon chevron
-            const activeIcon = activeBtn.querySelector('i');
-            if(activeIcon) activeIcon.classList.remove('opacity-0');
+<!-- ══════ FOOTER ══════ -->
+<footer class="bg-tarbes-dark text-white pt-10 md:pt-14 pb-6 border-t-[6px] border-tarbes-yellow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-6 md:gap-8 mb-8">
+            <div class="flex flex-col items-center md:items-start space-y-3">
+                <div class="flex items-center gap-3"><div class="bg-white/10 p-2.5 rounded-xl"><img src="assets/logo-sjt-blanco.png" alt="Logo SJT" class="h-12 md:h-14"></div><div class="bg-white/10 p-2.5 rounded-xl"><img src="assets/logo_citarbes.png" alt="CITARBES" class="h-12 md:h-14 object-contain"></div></div>
+                <div class="text-center md:text-left"><div class="font-bebas text-lg md:text-xl tracking-wide">HERMANAS DE SAN JOSÉ DE TARBES</div><p class="text-[10px] text-white/50">CITARBES — Centro Integral Tarbesiano</p></div>
+            </div>
+            <div class="text-center md:text-right text-xs text-white/70 space-y-1"><p class="font-bold text-white text-sm md:text-base font-futura">Provincia de Venezuela-México</p><p>Proyecto Pastoral Educativo 2026-2027</p></div>
+        </div>
+        <div class="border-t border-white/10 pt-5 flex flex-col md:flex-row justify-between items-center text-[10px] text-white/50 gap-3">
+            <p>© 2026 Hermanas de San José de Tarbes. Todos los derechos reservados.</p>
+            <div class="flex space-x-4">
+                <a href="https://www.instagram.com/hermanasdesanjosedetarbesve/" target="_blank" rel="noopener" class="hover:text-tarbes-yellow transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61573362697696" target="_blank" rel="noopener" class="hover:text-tarbes-yellow transition"><i class="fa-brands fa-facebook text-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ══════ SCRIPTS ══════ -->
+<script>
+function openTab(t){document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('bg-tarbes-blue','text-white','shadow-lg','border-transparent');b.classList.add('bg-white','text-tarbes-lightblue','border-tarbes-gray/50');const i=b.querySelector('i');if(i)i.classList.add('opacity-0')});document.getElementById(t).classList.add('active');const a=document.getElementById('btn-'+t);a.classList.remove('bg-white','text-tarbes-lightblue','border-tarbes-gray/50');a.classList.add('bg-tarbes-blue','text-white','shadow-lg','border-transparent');const ai=a.querySelector('i');if(ai)ai.classList.remove('opacity-0')}
+document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',()=>document.getElementById('mobile-menu').classList.add('hidden')));
+function updateProgress(){const s=new Date('2026-09-01'),e=new Date('2027-07-15'),n=new Date(),t=e-s,el=Math.max(0,Math.min(n-s,t)),p=Math.round(el/t*100);document.getElementById('progress-fill').style.width=p+'%';document.getElementById('progress-percent').textContent=p+'%';const m2=new Date('2027-01-06'),m3=new Date('2027-04-01');let l='';if(n<s)l='Próximamente';else if(n<m2)l='1er Momento';else if(n<m3)l='2do Momento';else if(n<=e)l='3er Momento';else l='Completado ✓';document.getElementById('progress-label').textContent=l}
+updateProgress();
+
+const timelineEvents = [
+    { dateStr: '2026-09-01', displayDate: 'Septiembre 2026', title: 'Jornada de Inducción', desc: 'Inicio de actividades escolares ("Renacer en el Espíritu: juntos").' },
+    { dateStr: '2026-09-11', displayDate: '11 de Sep, 2026', title: 'Solemnidad Ntra. Sra. de Coromoto', desc: 'Eucaristía de consagración de la Patria y del año escolar.' },
+    { dateStr: '2026-10-01', displayDate: 'Octubre 2026', title: 'Mes Misionero - DOMUND', desc: '"Un millón de niños rezando el rosario" y Rosario Misionero Tarbesiano.' },
+    { dateStr: '2026-12-01', displayDate: 'Diciembre 2026', title: 'Adviento y Navidad', desc: 'Novenas de aguinaldos y entrega de gestos solidarios a comunidades vulnerables.' },
+    { dateStr: '2027-02-10', displayDate: '10 de Feb, 2027', title: 'Miércoles de Ceniza', desc: 'Imposición de cenizas y campaña de solidaridad escolar ("Cuaresma compartida").' },
+    { dateStr: '2027-02-11', displayDate: '11 de Feb, 2027', title: 'Festividad Ntra. Sra. de Lourdes', desc: 'Peregrinación interna y consagración comunitaria a la Virgen de Lourdes.' },
+    { dateStr: '2027-03-01', displayDate: '1 al 5 de Mar, 2027', title: 'Semana Vocacional Tarbesiana', desc: 'Formación y celebración sobre el perfil de San José (silencio, providencia, resiliencia).' },
+    { dateStr: '2027-03-19', displayDate: '19 de Mar, 2027', title: 'Solemnidad de San José', desc: 'Festividad patronal de la Congregación y Retiro anual del personal de las Obras SJT.' },
+    { dateStr: '2027-03-21', displayDate: '21 al 28 de Mar, 2027', title: 'Semana Santa Escolar', desc: 'Domingo de Ramos, Jueves Santo, Viernes Santo y Pascua Juvenil de Resurrección.' },
+    { dateStr: '2027-05-16', displayDate: '16 de May, 2027', title: 'Solemnidad de Pentecostés', desc: 'Fiesta del Espíritu Santo, soplo de vida y renovación ("Renacer en el Espíritu").' },
+    { dateStr: '2027-06-13', displayDate: '13 de Jun, 2027', title: '138 Años de Presencia SJT', desc: 'Celebración central de las Hermanas de San José de Tarbes en Venezuela.' },
+    { dateStr: '2027-07-15', displayDate: 'Julio 2027', title: 'Clausura del Año Escolar', desc: 'Eucaristía de acción de gracias y celebración de la Cosecha Tarbesiana.' }
+];
+
+function renderTimeline() {
+    const container = document.getElementById('timeline-container');
+    if (!container) return;
+    
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    
+    let nextFound = false;
+
+    timelineEvents.forEach((ev, index) => {
+        const evDate = new Date(ev.dateStr + 'T00:00:00');
+        
+        let status = 'pending';
+        let bgClass = 'bg-white';
+        let borderClass = 'border-tarbes-gray/20';
+        let dotColor = 'bg-tarbes-gray/20 text-tarbes-lightblue';
+        let dotIcon = '<i class="fa-solid fa-calendar text-[10px] md:text-xs"></i>';
+        
+        if (evDate < today) {
+            status = 'past';
+            bgClass = 'bg-[#f8f9fa] opacity-60';
+            dotColor = 'bg-green-500 text-white';
+            dotIcon = '<i class="fa-solid fa-check text-[10px] md:text-xs"></i>';
+        } else if (!nextFound) {
+            status = 'next';
+            nextFound = true;
+            bgClass = 'bg-tarbes-blue/5 scale-100 shadow-xl ring-2 ring-tarbes-yellow relative z-10';
+            borderClass = 'border-tarbes-yellow';
+            dotColor = 'bg-tarbes-yellow text-tarbes-blue shadow-lg shadow-tarbes-yellow/40';
+            dotIcon = '<i class="fa-solid fa-star fa-spin-pulse text-[10px] md:text-xs"></i>';
         }
-    </script>
+
+        const isLeft = index % 2 === 0;
+        
+        const html = `
+        <div class="relative flex md:justify-between items-center w-full ${isLeft ? 'md:flex-row-reverse' : 'md:flex-row'} group">
+            <!-- Icono central -->
+            <div class="absolute left-4 md:left-1/2 w-7 h-7 md:w-10 md:h-10 rounded-full border-[3px] md:border-4 border-[#f8f9fa] flex items-center justify-center transform -translate-x-1/2 z-20 ${dotColor} transition-transform duration-300 group-hover:scale-110 top-5 md:top-auto">
+                ${dotIcon}
+            </div>
+            <!-- Espaciador desktop -->
+            <div class="hidden md:block md:w-5/12"></div>
+            <!-- Tarjeta -->
+            <div class="w-full pl-10 pr-0 md:px-0 md:w-5/12">
+                <div class="${bgClass} border ${borderClass} rounded-2xl p-4 md:p-5 shadow-md w-full relative transition-all duration-300 hover:shadow-lg ${isLeft ? 'md:text-right' : 'md:text-left'} ml-1 md:ml-0">
+                    ${status === 'next' ? `<span class="absolute -top-3 ${isLeft ? 'md:right-5 left-5' : 'left-5'} bg-tarbes-yellow text-tarbes-blue text-[9px] md:text-[10px] font-bold px-3 py-1 rounded-full uppercase shadow-sm">PRÓXIMA ACTIVIDAD</span>` : ''}
+                    <p class="font-futura font-bold text-[10px] md:text-xs uppercase mb-1 ${status === 'past' ? 'text-tarbes-lightblue' : 'text-tarbes-blue'}">${ev.displayDate}</p>
+                    <h4 class="font-bebas text-xl md:text-3xl mb-1 md:mb-1.5 leading-none ${status === 'past' ? 'text-tarbes-dark/70' : 'text-tarbes-dark'}">${ev.title}</h4>
+                    <p class="text-[11px] md:text-xs leading-relaxed ${status === 'past' ? 'text-tarbes-lightblue/70' : 'text-tarbes-lightblue'}">${ev.desc}</p>
+                </div>
+            </div>
+        </div>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+}
+renderTimeline();
+</script>
 </body>
 </html>
